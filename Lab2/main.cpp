@@ -13,7 +13,7 @@
 using namespace std;
 using namespace glm;
 
-vector<vec3> teapotColors = { { 1, 1, 1 }, { 0, 0, 1 }, { 1, 0, 0 }, { 1, 1, 0 }, { 1.0f / 2, 0, 1 } };
+vector<vec3> teapotColors = { { 1, 1, 1 }, { 0, 0, 1 }, { 1, 0, 0 }, { 1, 1, 0 }, { 0.5f, 0, 1 } };
 double currentTime = 0;
 
 size_t getColorIndex()
