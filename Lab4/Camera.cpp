@@ -41,16 +41,17 @@ void Camera::rotateLeftRight(float degree)
 
 void Camera::rotateUpDown(float degree)
 {
-    angleY += radians(degree);
+    angleY -= radians(degree);
     recalculatePosition();
 }
 
 void Camera::zoomInOut(float distance)
 {
-    r += distance;
+    r -= distance;
     if (r < 1e-3) {
         r = 1e-3;
     }
+    recalculatePosition();
 }
 
 void Camera::apply()

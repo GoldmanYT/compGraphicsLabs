@@ -18,6 +18,25 @@ using namespace glm;
 
 vector<GraphicObject> graphicObjects;
 Camera camera;
+long long prevTime;
+long long simulationTime;
+char* windowTitle = new char[256];
+
+long long getFPS()
+{
+    LARGE_INTEGER data;
+    QueryPerformanceFrequency(&data);
+    return data.QuadPart;
+}
+
+long long getSimulationTime()
+{
+    LARGE_INTEGER data;
+    QueryPerformanceCounter(&data);
+    long long result = data.QuadPart - prevTime;
+    prevTime = data.QuadPart;
+    return result;
+}
 
 // функция, вызываемая при изменении размеров окна
 void reshape(int w, int h)
@@ -57,43 +76,42 @@ void display(void)
 };
 
 // функция вызывается каждые 20 мс
-void simulation(int value)
+void simulation()
 {
+    // определение времени симуляции
+    simulationTime = getSimulationTime();
     // устанавливаем признак того, что окно нуждается в перерисовке
     glutPostRedisplay();
-    // эта же функция будет вызвана еще раз через 20 мс
-    glutTimerFunc(20, simulation, 0);
     camera.apply();
+    
+    snprintf(windowTitle, 256, (char*)"Laba_04 [%d FPS]", getFPS());
+    cout << windowTitle << endl;
+    glutSetWindowTitle(windowTitle);
 };
 
 // Функция обработки нажатия клавиш
 void keyboardFunc(unsigned char key, int x, int y)
 {
-    printf("Key code is %i\n", key);
-
     switch (static_cast<char>(key)) {
     case 'w':
-        cout << "rotateUp\n";
-        camera.rotateUpDown(5.0);
+        camera.rotateUpDown(5.0 * simulationTime / 1e6);
         break;
     case 's':
-        camera.rotateUpDown(-5.0);
+        camera.rotateUpDown(-5.0 * simulationTime / 1e6);
         break;
     case 'a':
-        camera.rotateLeftRight(5.0);
+        camera.rotateLeftRight(5.0 * simulationTime / 1e6);
         break;
     case 'd':
-        camera.rotateLeftRight(-5.0);
+        camera.rotateLeftRight(-5.0 * simulationTime / 1e6);
         break;
     case '+':
-        camera.zoomInOut(0.2);
+        camera.zoomInOut(0.2 * simulationTime / 1e6);
         break;
     case '-':
-        camera.zoomInOut(-0.2);
+        camera.zoomInOut(-0.2 * simulationTime / 1e6);
         break;
     }
-    vec3 position = camera.getPosition();
-    printf("X: %f, Y: %f, Z: %f\n", position.x, position.y, position.z);
 };
 
 int main(int argc, char** argv)
@@ -119,7 +137,7 @@ int main(int argc, char** argv)
     // устанавливаем функцию, которая будет вызываться при изменении размеров окна
     glutReshapeFunc(reshape);
     // устанавливаем функцию, которая будет вызвана через 20 мс
-    glutTimerFunc(20, simulation, 0);
+    glutIdleFunc(simulation);
     // устанавливаем функцию, которая будет вызываться при нажатии на клавишу
     glutKeyboardFunc(keyboardFunc);
 
