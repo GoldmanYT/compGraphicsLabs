@@ -5,6 +5,8 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 
+#include <iostream>
+
 using namespace glm;
 
 // йкюяя дкъ пюанрш я йюлепни
