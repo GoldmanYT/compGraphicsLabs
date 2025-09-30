@@ -54,9 +54,6 @@ void Camera::rotateLeftRight(float degree)
 void Camera::rotateUpDown(float degree)
 {
     angleY -= radians(degree);
-    if (angleY < 0) {
-        angleY += 2 * acosf(-1);
-    }
     recalculatePosition();
 }
 
@@ -74,7 +71,7 @@ void Camera::apply()
     gluLookAt(
         position.x, position.y, position.z,
         0, 0, 0,
-        0, 1 - 2 * ((long long)(angleY / acos(-1)) % 2 != 0), 0);
+        0, 1 - 2 * ((long long)floor(angleY / acos(-1)) % 2 != 0), 0);
 }
 
 void Camera::recalculatePosition()
