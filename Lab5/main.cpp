@@ -7,10 +7,8 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 
-#include "Camera.h"
 #include "Data.h"
 #include "Display.h"
-#include "GraphicObject.h"
 #include "Simulation.h"
 
 // используем пространство имен стандартной библиотеки
@@ -26,11 +24,6 @@ int main(int argv, char** argc)
     // инициализация дисплея (формат вывода)
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH | GLUT_MULTISAMPLE);
 
-    // включаем режим расчета освещения
-    glEnable(GL_LIGHTING);
-    // включаем нулевой источник света
-    glEnable(GL_LIGHT0);
-
     // СОЗДАНИЕ ОКНА:
     // 1. устанавливаем верхний левый угол окна
     glutInitWindowPosition(200, 200);
@@ -38,6 +31,12 @@ int main(int argv, char** argc)
     glutInitWindowSize(800, 600);
     // 3. создаем окно
     glutCreateWindow("Lab_04");
+
+    // включаем режим расчета освещения
+    glEnable(GL_LIGHTING);
+    // включаем нулевой источник света
+    glEnable(GL_LIGHT0);
+    glEnable(GL_NORMALIZE);
 
     // УСТАНОВКА ФУНКЦИЙ ОБРАТНОГО ВЫЗОВА
     // устанавливаем функцию, которая будет вызываться для перерисовки окна

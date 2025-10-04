@@ -2,7 +2,7 @@
 
 Light::Light()
 {
-    setPosition(vec3(1, 1, 1));
+    setPosition(vec3(1));
     setAmbient(vec4(1));
     setDiffuse(vec4(1));
     setSpecular(vec4(1));
@@ -17,7 +17,6 @@ Light::Light(vec3 position)
 }
 
 Light::Light(float x, float y, float z)
-    : position(x, y, z, 1)
 {
     setPosition(vec3(x, y, z));
     setAmbient(vec4(1));
@@ -50,5 +49,8 @@ void Light::setSpecular(vec4 color)
 
 void Light::apply(GLenum LightNumber)
 {
-
+    glLightfv(LightNumber, GL_AMBIENT, &ambient[0]);
+    glLightfv(LightNumber, GL_DIFFUSE, &diffuse[0]);
+    glLightfv(LightNumber, GL_SPECULAR, &specular[0]);
+    glLightfv(LightNumber, GL_POSITION, &position[0]);
 }

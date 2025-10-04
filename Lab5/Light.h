@@ -1,6 +1,9 @@
 #pragma once
 
-#include "Data.h"
+#include "GL/freeglut.h"
+#include "glm/glm.hpp"
+
+using namespace glm;
 
 // йкюяя дкъ пюанрш я хярнвмхйнл яберю
 class Light {

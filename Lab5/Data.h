@@ -2,6 +2,7 @@
 
 #include "Camera.h"
 #include "GraphicObject.h"
+#include "Light.h"
 
 #include "GL/freeglut.h"
 #include "glm/glm.hpp"
@@ -25,15 +26,11 @@ extern float simulationTime;
 // буфер для имени окна
 extern char windowTitle[256];
 
-extern std::string DIFFUSE_TEXT;
-extern std::string AMBIENT_TEXT;
-extern std::string SPECULAR_TEXT;
-extern std::string EMISSION_TEXT;
-extern std::string SHINESS_TEXT;
-
 // список графических объектов
 extern std::vector<GraphicObject> graphicObjects;
 // используемая камера
 extern Camera camera;
+// источник света
+extern Light light;
 // функция для инициализации всех общих данных (камера, объекты и т.д.)
 void initData();

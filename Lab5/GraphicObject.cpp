@@ -3,7 +3,8 @@
 GraphicObject::GraphicObject()
     : position()
     , angle(0)
-    , color()
+    , color(vec3(1))
+    , modelMatrix(mat4(1))
 {
 }
 
@@ -29,7 +30,7 @@ float GraphicObject::getAngle()
     return angle;
 }
 
-void GraphicObject::set—olor(vec3 color)
+void GraphicObject::setColor(vec3 color)
 {
     this->color = color;
 }
@@ -37,6 +38,11 @@ void GraphicObject::set—olor(vec3 color)
 vec3 GraphicObject::getColor()
 {
     return color;
+}
+
+void GraphicObject::setMaterial(std::shared_ptr<PhongMaterial> material)
+{
+    this->material = material;
 }
 
 // ‡Ò˜ÂÚ Ï‡ÚËˆ˚ modelMatrix Ì‡ ÓÒÌÓ‚Â position Ë angle
@@ -52,6 +58,9 @@ void GraphicObject::recalculateModelMatrix()
 void GraphicObject::draw()
 {
     glColor3f(color.r, color.g, color.b);
+    if (material != nullptr) {
+        material->apply();
+    }
     glPushMatrix();
     glMultMatrixf(&modelMatrix[0][0]);
     glutSolidTeapot(1.0);

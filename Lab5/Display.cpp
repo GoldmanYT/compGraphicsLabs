@@ -9,30 +9,30 @@ long long getFPS()
     return FPS;
 }
 
-// функция вызывается при перерисовке окна
-// в том числе и принудительно, по командам glutPostRedisplay
+// CALLBACK-ФУНКЦИЯ ВЫЗЫВАЕТСЯ ПРИ ПЕРЕРИСОВКЕ ОКНА
 void display()
 {
     // отчищаем буфер цвета и буфер глубины
-    glClearColor(0, 0, 0, 1.0);
+    glClearColor(0, 0, 0, 1);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
     // включаем тест глубины
     glEnable(GL_DEPTH_TEST);
-
+    // включаем режим расчета освещения
+    glEnable(GL_LIGHTING);
     // устанавливаем камеру
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     camera.apply();
-
+    // устанавливаем источник света
+    light.apply(GL_LIGHT0);
+    // выводим все графические объекты
     for (auto& go : graphicObjects) {
         go.draw();
     }
-
     // смена переднего и заднего буферов
     glutSwapBuffers();
-
-    sprintf_s(windowTitle, 256, "Lab 4 [%lld FPS]", getFPS());
+    // выводим заголовок окна
+    sprintf_s(windowTitle, 128, "Lab 5 [%lld FPS]", getFPS());
     glutSetWindowTitle(windowTitle);
 };
 

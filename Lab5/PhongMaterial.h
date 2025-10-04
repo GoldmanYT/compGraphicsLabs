@@ -1,7 +1,19 @@
 #pragma once
 
-#include "Data.h"
+#include "GL/freeglut.h"
+#include "glm/glm.hpp"
+
 #include <fstream>
+#include <iostream>
+
+using namespace glm;
+using namespace std;
+
+extern std::string DIFFUSE_TEXT;
+extern std::string AMBIENT_TEXT;
+extern std::string SPECULAR_TEXT;
+extern std::string EMISSION_TEXT;
+extern std::string SHINESS_TEXT;
 
 //  À¿—— ƒÀﬂ –¿¡Œ“€ — Ã¿“≈–»¿ÀŒÃ
 class PhongMaterial {

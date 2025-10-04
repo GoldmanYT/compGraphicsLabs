@@ -1,6 +1,10 @@
 #include "PhongMaterial.h"
 
-using namespace std;
+std::string DIFFUSE_TEXT = "diffuse:";
+std::string AMBIENT_TEXT = "ambient:";
+std::string SPECULAR_TEXT = "specular:";
+std::string EMISSION_TEXT = "emission:";
+std::string SHINESS_TEXT = "shininess:";
 
 PhongMaterial::PhongMaterial()
     : ambient()
@@ -42,8 +46,8 @@ void PhongMaterial::load(string filename)
     string parameterName;
     float r, g, b, a;
 
+    file >> parameterName;
     while (file) {
-        file >> parameterName;
         if (parameterName == DIFFUSE_TEXT) {
             file >> r >> g >> b >> a;
             setDiffuse(vec4(r, g, b, a));
@@ -60,6 +64,7 @@ void PhongMaterial::load(string filename)
             file >> a;
             setShininess(a);
         }
+        file >> parameterName;
     }
 
     file.close();
@@ -67,4 +72,9 @@ void PhongMaterial::load(string filename)
 
 void PhongMaterial::apply()
 {
+    glMaterialfv(GL_FRONT, GL_AMBIENT, &ambient[0]);
+    glMaterialfv(GL_FRONT, GL_DIFFUSE, &diffuse[0]);
+    glMaterialfv(GL_FRONT, GL_SPECULAR, &specular[0]);
+    glMaterialfv(GL_FRONT, GL_EMISSION, &emission[0]);
+    glMaterialf(GL_FRONT, GL_SHININESS, shininess);
 }
