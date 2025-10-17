@@ -4,7 +4,7 @@
 #include "GraphicObject.h"
 
 #include "GL/freeglut.h"
-#include "glm/glm.hpp"
+#include "../glm/glm.hpp"
 
 #include <vector>
 #include <string>

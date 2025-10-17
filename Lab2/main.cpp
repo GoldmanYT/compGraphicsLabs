@@ -6,7 +6,7 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 
-#include "glm/glm.hpp"
+#include "../glm/glm.hpp"
 #include <vector>
 
 // используем пространство имен стандартной библиотеки
@@ -92,7 +92,7 @@ int main(int argc, char** argv)
     // 2. устанавливаем размер окна
     glutInitWindowSize(800, 600);
     // 3. создаем окно
-    glutCreateWindow("Laba_01");
+    glutCreateWindow("Lab 2");
 
     // УСТАНОВКА ФУНКЦИЙ ОБРАТНОГО ВЫЗОВА
     // устанавливаем функцию, которая будет вызываться для перерисовки окна

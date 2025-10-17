@@ -1,6 +1,6 @@
 #pragma once
 
-#include "glm/glm.hpp"
+#include "../glm/glm.hpp"
 #include "GL/freeglut.h"
 #include <GL/gl.h>
 #include <GL/glu.h>

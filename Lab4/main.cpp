@@ -3,7 +3,7 @@
 #include <windows.h>
 
 #include "GL/freeglut.h"
-#include "glm/glm.hpp"
+#include "../glm/glm.hpp"
 #include <GL/gl.h>
 #include <GL/glu.h>
 
