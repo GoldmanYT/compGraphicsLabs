@@ -137,6 +137,7 @@
     <ClCompile Include="GraphicObject.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="PhongMaterial.cpp" />
     <ClCompile Include="Simulation.cpp" />
   </ItemGroup>
@@ -145,6 +146,7 @@
     <ClInclude Include="Data.h" />
     <ClInclude Include="GraphicObject.h" />
     <ClInclude Include="Light.h" />
+    <ClInclude Include="Mesh.h" />
     <ClInclude Include="PhongMaterial.h" />
     <ClInclude Include="Simulation.h" />
   </ItemGroup>

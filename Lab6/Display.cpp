@@ -25,14 +25,14 @@ void display()
     camera.apply();
     // устанавливаем источник света
     light.apply(GL_LIGHT0);
+
     // выводим все графические объекты
-    for (auto& go : graphicObjects) {
-        go.draw();
-    }
+    planeGraphicObject.draw();
+
     // смена переднего и заднего буферов
     glutSwapBuffers();
     // выводим заголовок окна
-    sprintf_s(windowTitle, 128, "Lab 5 [%lld FPS]", getFPS());
+    sprintf_s(windowTitle, 128, "Lab 6 [%lld FPS]", getFPS());
     glutSetWindowTitle(windowTitle);
 };
 

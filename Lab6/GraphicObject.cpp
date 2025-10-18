@@ -45,6 +45,11 @@ void GraphicObject::setMaterial(std::shared_ptr<PhongMaterial> material)
     this->material = material;
 }
 
+void GraphicObject::setMesh(std::shared_ptr<Mesh> mesh)
+{
+    this->mesh = mesh;
+}
+
 // расчет матрицы modelMatrix на основе position и angle
 void GraphicObject::recalculateModelMatrix()
 {
@@ -63,6 +68,8 @@ void GraphicObject::draw()
     }
     glPushMatrix();
     glMultMatrixf(&modelMatrix[0][0]);
-    glutSolidTeapot(1.0);
+
+    mesh->draw();
+
     glPopMatrix();
 }
