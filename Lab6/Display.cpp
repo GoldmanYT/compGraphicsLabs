@@ -26,8 +26,15 @@ void display()
     // устанавливаем источник света
     light.apply(GL_LIGHT0);
 
-    // выводим все графические объекты
+    // вывод плоскости
     planeGraphicObject.draw();
+
+    // вывод всех объектов
+    for (int x = 0; x < MAP_WIDTH; ++x) {
+        for (int y = 0; y < MAP_WIDTH; ++y) {
+            mapObjects[x][y]->draw();
+        }
+    }
 
     // смена переднего и заднего буферов
     glutSwapBuffers();

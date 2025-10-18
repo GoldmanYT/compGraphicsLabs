@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Camera.h"
+#include "GameObject.h"
 #include "GraphicObject.h"
 #include "Light.h"
 
@@ -15,7 +16,19 @@ extern const float VERTICAL_SPEED;
 extern const float HORIZONTAL_SPEED;
 extern const float ZOOM_SPEED;
 
+extern const int MATERIAL_GREEN;
+extern const int MATERIAL_YELLOW;
+extern const int MATERIAL_GRAY;
+extern const int MATERIAL_DARK_GRAY;
+
+extern const int MESH_BOX;
+extern const int MESH_CHAMFER_BOX;
+extern const int MESH_SIMPLE_PLANE;
+extern const int MESH_SPHERE;
+
 extern vector<string> MATERIAL_FILENAMES;
+
+extern vector<string> MESH_FILENAMES;
 
 // частота счётчика производительности
 extern float FREQUENCY;
@@ -32,11 +45,14 @@ extern float simulationTime;
 // буфер для имени окна
 extern char windowTitle[256];
 
+const int MAP_WIDTH = 21;
+const int MAP_HEIGHT = 21;
+
 // карта проходимости
-extern int passabilityMap[21][21];
+extern int passabilityMap[MAP_WIDTH][MAP_HEIGHT];
 
 // список игровых объектов расположенных на карте
-// extern std::shared_ptr<GameObject> mapObjects[21][21];
+extern std::shared_ptr<GameObject> mapObjects[MAP_WIDTH][MAP_HEIGHT];
 
 // графический объект для плоскости (частный случай)
 extern GraphicObject planeGraphicObject;
