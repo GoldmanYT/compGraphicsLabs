@@ -3,7 +3,7 @@
 using namespace std;
 
 Camera::Camera()
-    : r(25)
+    : r(35)
     , angleX(1.05f)
     , angleY(0.64f)
 {

@@ -10,12 +10,12 @@ const float ZOOM_SPEED = 10.0f;
 
 const int MATERIAL_GREEN = 0;
 const int MATERIAL_YELLOW = 1;
-const int MATERIAL_GRAY = 2;
-const int MATERIAL_DARK_GRAY = 3;
+const int MATERIAL_DARK_GRAY = 2;
+const int MATERIAL_GRAY = 3;
 
-const int MESH_BOX = 0;
-const int MESH_CHAMFER_BOX = 1;
-const int MESH_SIMPLE_PLANE = 2;
+const int MESH_SIMPLE_PLANE = 0;
+const int MESH_BOX = 1;
+const int MESH_CHAMFER_BOX = 2;
 const int MESH_SPHERE = 3;
 
 vector<string> MATERIAL_FILENAMES = {
@@ -26,9 +26,9 @@ vector<string> MATERIAL_FILENAMES = {
 };
 
 vector<string> MESH_FILENAMES = {
-    "data/meshes/Box.obj",
-    "data/meshes/ChamferBox.obj",
     "data/meshes/SimplePlane.obj",
+    "data/meshes/ChamferBox.obj",
+    "data/meshes/Box.obj",
     "data/meshes/Sphere.obj"
 };
 
@@ -78,7 +78,7 @@ GraphicObject planeGraphicObject;
 Camera camera;
 
 // источник света
-Light light;
+Light light(10.0f, 10.0f, 10.0f);
 
 // используемые материалы
 vector<shared_ptr<PhongMaterial>> materials;
@@ -111,19 +111,24 @@ void initData()
     }
 
     GraphicObject tempGraphicObject {};
-    tempGraphicObject.setMaterial(materials[3]);
+    tempGraphicObject.setMaterial(materials[MATERIAL_GREEN]);
     tempGraphicObject.setMesh(meshes[MESH_SIMPLE_PLANE]);
+    tempGraphicObject.setPosition({ 0.0f, -0.5f - 1e-4f, 0.0f });
     planeGraphicObject = tempGraphicObject;
 
     for (int x = 0; x < MAP_WIDTH; ++x) {
         for (int y = 0; y < MAP_HEIGHT; ++y) {
-            shared_ptr<GameObject> tempGameObject = shared_ptr<GameObject>(new GameObject);
             int gameObjectType = passabilityMap[x][y];
-            tempGraphicObject.setMaterial(materials[gameObjectType]);
-            tempGraphicObject.setMesh(meshes[gameObjectType]);
-            tempGameObject->setPosition(x, y);
-            tempGameObject->setGraphicObject(tempGraphicObject);
-            mapObjects[x][y] = tempGameObject;
+            int meshType = (gameObjectType == MATERIAL_GRAY) ? MESH_CHAMFER_BOX : MESH_BOX;
+            if (gameObjectType != 0) {
+                shared_ptr<GameObject> tempGameObject = shared_ptr<GameObject>(new GameObject);
+                tempGraphicObject.setMaterial(materials[gameObjectType]);
+                tempGraphicObject.setMesh(meshes[meshType]);
+                tempGraphicObject.setPosition({ x - MAP_WIDTH / 2, 0, y - MAP_HEIGHT / 2 });
+                tempGameObject->setPosition(x, y);
+                tempGameObject->setGraphicObject(tempGraphicObject);
+                mapObjects[x][y] = tempGameObject;
+            }
         }
     }
 }

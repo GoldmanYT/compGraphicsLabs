@@ -32,7 +32,9 @@ void display()
     // вывод всех объектов
     for (int x = 0; x < MAP_WIDTH; ++x) {
         for (int y = 0; y < MAP_WIDTH; ++y) {
-            mapObjects[x][y]->draw();
+            if (mapObjects[x][y] != nullptr) {
+                mapObjects[x][y]->draw();
+            }
         }
     }
 
